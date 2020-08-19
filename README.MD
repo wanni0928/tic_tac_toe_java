@@ -1,14 +1,14 @@
 # Tic Tac Toe project
 ## Project summary
 1. Board
- - 3 x 3
+    - 3 x 3
 2. Player
- - human player
- - AI player
+    - human player
+    - AI player
 3. Winner Judgement
- - case01. 3 stones horizontally
- - case02. 3 stones vertically
- - case03. 3 stones diagonally
+    - case01. 3 stones horizontally
+    - case02. 3 stones vertically
+    - case03. 3 stones diagonally
 
 ## Design
 1. Input Integer N
