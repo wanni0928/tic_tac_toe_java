@@ -2,13 +2,14 @@ package com.tictactoe.board;
 
 public class Board {
 	private Position position;
-	private char[][] board;
+	private String[][] board;
 	
 	public Board() {
+		this.position = position;
 		this.board = board;
 	}
 
-	public Board(Position position, char[][] board) {
+	public Board(Position position, String[][] board) {
 		super();
 		this.position = position;
 		this.board = board;
@@ -22,11 +23,11 @@ public class Board {
 		this.position = position;
 	}
 
-	public char[][] getBoard() {
+	public String[][] getBoard() {
 		return board;
 	}
 
-	public void setBoard(char[][] board) {
+	public void setBoard(String[][] board) {
 		this.board = board;
 	}
 	

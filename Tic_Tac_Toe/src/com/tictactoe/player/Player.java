@@ -1,6 +1,6 @@
 package com.tictactoe.player;
 
-public abstract class Player implements Playable {
+public class Player implements Playable {
 	private int score;
 	private String name;
 	private boolean isComputer;
@@ -39,6 +39,9 @@ public abstract class Player implements Playable {
 	public void setComputer(boolean isComputer) {
 		this.isComputer = isComputer;
 	}
-	
-	
+
+	@Override
+	public String[] putStone(String location) {
+		return location.split("[ \\t\\n\\x0B\\f\\r]");
+	}
 }

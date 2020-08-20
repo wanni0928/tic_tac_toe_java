@@ -8,11 +8,20 @@ public class HumanPlayer extends Player implements Playable {
 	public HumanPlayer(int score, String name, boolean isComputer) {
 		super(score, name, isComputer);
 	}
+	
+	@Override
+	public int getScore() {
+		return super.getScore();
+	}
 
 	@Override
-	public char[] putStone(String location) {
-		System.out.println("human put stone");
-		return null;
+	public void setScore(int score) {
+		super.setScore(score);
+	}
+
+	@Override
+	public String[] putStone(String location) {
+		return super.putStone(location);
 	}
 
 }

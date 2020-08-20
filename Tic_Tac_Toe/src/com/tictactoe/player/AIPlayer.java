@@ -11,13 +11,19 @@ public class AIPlayer extends Player implements Playable {
 		super(score, name, isComputer);
 	}
 
-
+	@Override
+	public int getScore() {
+		return super.getScore();
+	}
 
 	@Override
-	public char[] putStone(String location) {
-		// TODO Auto-generated method stub
-		System.out.println("ai put stone");
-		return null;
+	public void setScore(int score) {
+		super.setScore(score);
+	}
+
+	@Override
+	public String[] putStone(String location) {
+		return location.split("[ \\t\\n\\x0B\\f\\r]");
 	}
 
 }

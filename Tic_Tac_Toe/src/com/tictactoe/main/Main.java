@@ -1,13 +1,10 @@
 package com.tictactoe.main;
 
-import com.tictactoe.board.Board;
-import com.tictactoe.game.TicTacToe;
-import com.tictactoe.player.AIPlayer;
-import com.tictactoe.player.Player;
+import com.tictactoe.game.Game;
 
 public class Main {
 	public static void main(String[] args) {
-		TicTacToe game = new TicTacToe();
+		Game game = new Game();
 		game.initialize();
 	}
 }
