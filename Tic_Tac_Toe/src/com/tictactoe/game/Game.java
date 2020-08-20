@@ -136,19 +136,19 @@ public class Game implements GameSystem, GameService {
 		}
 		
 		if(whiteVerticalCnt == 3) {
-			//vertical
 			for (int i = 0; i < array.length; i++) {
-				if(i == 1) { // diagonal
+				if(i == 1) { 
+					// diagonal
 					if((array[0][i-1] == white 
 							&& array[1][i] == white 
 							&& array[2][i+1] == white) || 
 							(array[0][i+1] == white 
 							&& array[1][i] == white 
 							&& array[2][i-1] == white)) {
-						System.out.println("1번 대각선");
 						return player1;
 					}
 				}
+				//vertical
 				if(array[0][i] == white && array[1][i] == white && array[2][i] == white) {
 					return player1;
 				}
@@ -156,27 +156,25 @@ public class Game implements GameSystem, GameService {
 		}
 		
 		if(blackVerticalCnt == 3) {
-			//vertical
+			
 			for (int i = 0; i < array.length; i++) {
-				if(i == 1) { // diagonal
+				if(i == 1) { 
+					// diagonal
 					if((array[0][i-1] == black
 							&& array[1][i] == black 
 							&& array[2][i+1] == black) || 
 							(array[0][i+1] == black 
 							&& array[1][i] == black 
 							&& array[2][i-1] == black)) {
-						System.out.println("2번 대각선");
 						return player2;
 					}
 				}
+				//vertical
 				if(array[0][i] == black && array[1][i] == black && array[2][i] == black) {
 					return player2;
 				}
 			}
 		}
-		
-//		if(blackVerticalCnt == 3) return player2;
-		
 		return null;
 	}
 
