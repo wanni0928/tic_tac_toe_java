@@ -34,7 +34,7 @@
 4. Player
     - The player `IS-A` Playable.
     - The player is basically human.
-    - The AIPlayer `HAS-A` player
+    - The AIPlayer `HAS-A` Player
 
 ### Game Process
 1. First, start the game with MainDriver.
