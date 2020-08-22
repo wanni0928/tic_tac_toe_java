@@ -2,6 +2,7 @@ package com.tictactoe.game;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Scanner;
 
 import com.tictactoe.board.Board;
@@ -38,12 +39,12 @@ public class Game implements GameSystem, GameService {
 		Player currentPlayer;
 		Player winner;
 		String[][] gameBoard = board.getBoard();
-		String[] location;
+		String[] location = new String[2];
 		String query;
 		String stone;
 		int idx;
 		int limit = 0;
-		int cnt = 0;
+//		int cnt = 0;
 		
 		players = new Player[2]; 
 		
@@ -55,7 +56,6 @@ public class Game implements GameSystem, GameService {
 				System.out.println("잘못입력 하셨네요. 프로그램을 종료합니다. 다시 하세요.");
 				System.exit(0);
 			}
-			
 			for(int i = 0; i < players.length; i++) {
 				Player samplePlayer = null;
 				System.out.printf("%d번째 플레이어는 ai 입니까?(y/n)\n", i+1);
@@ -70,7 +70,7 @@ public class Game implements GameSystem, GameService {
 				case "n":
 				case "N":
 					System.out.printf("%d번째 플레이어는 사람 입니다.\n", i+1);
-					samplePlayer = new Player();
+					samplePlayer = new HumanPlayer();
 					samplePlayer.setComputer(false);
 					break;
 				default:
@@ -90,11 +90,18 @@ public class Game implements GameSystem, GameService {
 			stone = currentPlayer == players[0] ? white : black;
 			System.out.println(currentPlayer.getName() + "의 차례입니다. 놓고 싶은 돌의 위치를 입력하세요. (x y)");
 			try {
-				location = currentPlayer.putStone(scanner.nextLine());
-				if(gameBoard[Integer.parseInt(location[0])][Integer.parseInt(location[1])] != blank) {
-					System.out.println("이미 놓여있습니다.");
-					continue;
+				if(currentPlayer instanceof HumanPlayer) {
+					System.out.println("human");
+					location = currentPlayer.putStone(scanner.nextLine());
+					if(gameBoard[Integer.parseInt(location[0])][Integer.parseInt(location[1])] != blank) {
+						System.out.println("이미 놓여있습니다.");
+						continue;
+					}
 				}
+				if(currentPlayer instanceof AIPlayer) {
+					System.out.println("ai");
+				}
+
 				gameBoard[Integer.parseInt(location[0])][Integer.parseInt(location[1])] = stone;
 				
 			} catch (Exception e) {
@@ -105,6 +112,7 @@ public class Game implements GameSystem, GameService {
 			for (String[] arr : gameBoard) {
 				System.out.println(Arrays.toString(arr));
 			}
+			
 			winner = judge(players[0], players[1], gameBoard);
 			
 			if(winner != null) {
@@ -119,7 +127,6 @@ public class Game implements GameSystem, GameService {
 
 	@Override
 	public Player judge(Player player1, Player player2, String[][] array) {
-//		Player winner = null;
 		int blackHorizonCnt = 0;
 		int whiteHorizoCnt = 0;
 		int blackVerticalCnt = 0;
@@ -135,47 +142,39 @@ public class Game implements GameSystem, GameService {
 			if(blackHorizonCnt == 3) return player2;
 		}
 		
-		if(whiteVerticalCnt == 3) {
-			for (int i = 0; i < array.length; i++) {
-				if(i == 1) { 
-					// diagonal
-					if((array[0][i-1] == white 
-							&& array[1][i] == white 
-							&& array[2][i+1] == white) || 
-							(array[0][i+1] == white 
-							&& array[1][i] == white 
-							&& array[2][i-1] == white)) {
-						return player1;
-					}
-				}
-				//vertical
-				if(array[0][i] == white && array[1][i] == white && array[2][i] == white) {
-					return player1;
-				}
-			}
-		}
+		if(checkAfterHorrizonCnt(whiteVerticalCnt, array, white)) return player1;
+		if(checkAfterHorrizonCnt(blackVerticalCnt, array, black)) return player2;
 		
-		if(blackVerticalCnt == 3) {
-			
+		return null;
+	}
+	
+	public void judge() {
+		
+	}
+	
+	@Override
+	public boolean checkAfterHorrizonCnt(int cnt, String[][] array, String stone) {
+		if(cnt == 3) {
 			for (int i = 0; i < array.length; i++) {
 				if(i == 1) { 
 					// diagonal
-					if((array[0][i-1] == black
-							&& array[1][i] == black 
-							&& array[2][i+1] == black) || 
-							(array[0][i+1] == black 
-							&& array[1][i] == black 
-							&& array[2][i-1] == black)) {
-						return player2;
+					if((array[0][i-1] == stone 
+							&& array[1][i] == stone 
+							&& array[2][i+1] == stone) 
+							|| 
+							(array[0][i+1] == stone 
+							&& array[1][i] == stone 
+							&& array[2][i-1] == stone)) {
+						return true;
 					}
 				}
 				//vertical
-				if(array[0][i] == black && array[1][i] == black && array[2][i] == black) {
-					return player2;
+				if(array[0][i] == stone && array[1][i] == stone && array[2][i] == stone) {
+					return true;
 				}
 			}
 		}
-		return null;
+		return false;
 	}
 
 	@Override
