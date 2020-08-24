@@ -30,7 +30,7 @@
   </class>  
   <interface id="4" language="java" name="com.tictactoe.game.GameSystem" project="Tic_Tac_Toe" 
     file="/Tic_Tac_Toe/src/com/tictactoe/game/GameSystem.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="900" y="160"/>    
+    <position height="-1" width="-1" x="1053" y="150"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,63 +75,63 @@
   </class>  
   <interface id="9" language="java" name="com.tictactoe.game.GameService" project="Tic_Tac_Toe" 
     file="/Tic_Tac_Toe/src/com/tictactoe/game/GameService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="715" y="161"/>    
+    <position height="-1" width="-1" x="746" y="113"/>    
     <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <dependency id="10">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <dependency id="11">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
+  <realization id="10">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <generalization id="11">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
   <dependency id="12">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <association id="13">    
+  <dependency id="13">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <association id="14">    
     <bendpoint x="1013" y="746"/>    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="14" name="position">        
+      <attribute id="15" name="position">        
         <position height="0" width="0" x="264" y="41"/>      
       </attribute>      
-      <multiplicity id="15" minimum="0" maximum="1">        
+      <multiplicity id="16" minimum="0" maximum="1">        
         <position height="0" width="0" x="264" y="41"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="16">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <realization id="17">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <dependency id="18">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <dependency id="19">    
+  <dependency id="17">    
     <bendpoint x="982" y="448"/>    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <realization id="20">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="5"/>  
+  <realization id="18">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="9"/>  
   </realization>  
-  <generalization id="21">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
+  <dependency id="19">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <realization id="20">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <dependency id="21">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
   <dependency id="22">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="5"/>  

@@ -1,2 +1,2 @@
-# Tic Tac Toe day03
+# Tic Tac Toe day04
 ## Rest in peace

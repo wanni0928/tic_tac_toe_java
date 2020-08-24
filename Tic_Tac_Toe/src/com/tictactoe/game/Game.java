@@ -1,8 +1,6 @@
 package com.tictactoe.game;
 
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Random;
 import java.util.Scanner;
 
 import com.tictactoe.board.Board;
@@ -35,14 +33,6 @@ public class Game implements GameSystem, GameService {
 		this.board = new Board();
 		this.turn = 0;
 	}
-	
-//	public String[][] deepCopy(String[][] arSrc){
-//        String[][] arDest = new String[3][3];
-//        for (int i = 0; i < arDest.length; i++) {
-//            System.arraycopy(arSrc[i], 0, arDest[i], 0, arDest.length);
-//        }
-//        return arDest;
-//    }
 	
 	@Override
 	public void play(Player player, Board board) {
@@ -103,7 +93,6 @@ public class Game implements GameSystem, GameService {
 		while(players[0].getScore() != limit && players[1].getScore() != limit ) {
 			currentPlayer = turn % 2 == 0 ? players[0] : players[1];
 			stone = currentPlayer == players[0] ? white : black;
-			vrStone = stone == white ? black : white;
 			blankCnt = 0;
 			System.out.println(currentPlayer.getName() + "의 차례입니다. 놓고 싶은 돌의 위치를 입력하세요. (x y)");
 			try {
@@ -116,6 +105,7 @@ public class Game implements GameSystem, GameService {
 					}
 				}
 				
+				vrStone = stone == white ? black : white;
 				if(currentPlayer instanceof AIPlayer) {
 					System.out.println("ai");
 					System.out.println(vrStone);
@@ -135,7 +125,7 @@ public class Game implements GameSystem, GameService {
 							System.out.println();
 							winner = judge(players[0], players[1], vrGameBoard);
 							if(winner == vrPlayer) {
-								System.out.println("여기를 막아라"); 
+								System.out.println("여기다!"); 
 								break vrLoop;
 							} 
 						}
