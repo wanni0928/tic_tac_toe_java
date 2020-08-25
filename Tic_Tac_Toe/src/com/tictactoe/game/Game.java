@@ -1,6 +1,7 @@
 package com.tictactoe.game;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import com.tictactoe.board.Board;
@@ -44,6 +45,8 @@ public class Game implements GameSystem, GameService {
 		String[][] corners = {{"0", "0"}, {"0", "2"}, {"2", "0"}, {"2", "2"}};
 		String[] location = new String[2];
 		String[] vrLocation = new String[2];
+		String[] vrBlockLocation = null;
+		String[] vrWinLocation = null;
 		String query;
 		String stone;
 		String vrStone;
@@ -105,68 +108,110 @@ public class Game implements GameSystem, GameService {
 					}
 				}
 				
-				vrStone = stone == white ? black : white;
+				
 				if(currentPlayer instanceof AIPlayer) {
-					System.out.println("ai");
-					System.out.println(vrStone);
+					
 					vrPlayer = currentPlayer == players[0] ? players[1] : players[0];
-					vrLoop:
-					for (int i = 0; i < gameBoard.length; i++) {
-						for (int j = 0; j < gameBoard.length; j++) {
-							vrGameBoard = utils.deepCopy(gameBoard);
-							vrLocation[0] = i + "";
-							vrLocation[1] = j + "";
-							if(vrGameBoard[Integer.parseInt(vrLocation[0])][Integer.parseInt(vrLocation[1])] != blank) continue;
-							vrGameBoard[Integer.parseInt(vrLocation[0])][Integer.parseInt(vrLocation[1])] = vrStone;
-							System.out.println("ai vr test");
-							for (String[] arr : vrGameBoard) {
-								System.out.println(Arrays.toString(arr));
+					if(winner != vrPlayer) {
+						vrStone = stone;
+						System.out.println("ai");
+						System.out.println(vrStone);
+						vrLoop2:
+						for (int i = 0; i < gameBoard.length; i++) {
+							for (int j = 0; j < gameBoard.length; j++) {
+								vrGameBoard = utils.deepCopy(gameBoard, 3, 3);
+								vrLocation[0] = i + "";
+								vrLocation[1] = j + "";
+								if(vrGameBoard[Integer.parseInt(vrLocation[0])][Integer.parseInt(vrLocation[1])] != blank) continue;
+								vrGameBoard[Integer.parseInt(vrLocation[0])][Integer.parseInt(vrLocation[1])] = vrStone;
+//								System.out.println("ai vr test");
+//								for (String[] arr : vrGameBoard) {
+//									System.out.println(Arrays.toString(arr));
+//								}
+								System.out.println();
+								winner = judge(players[0], players[1], vrGameBoard);
+								if(winner == currentPlayer) {
+									System.out.println("win point");
+									vrWinLocation = utils.deepCopy(vrLocation, 2);
+									System.out.println(Arrays.toString(vrWinLocation));
+									break vrLoop2;
+								}
 							}
-							System.out.println();
-							winner = judge(players[0], players[1], vrGameBoard);
-							if(winner == vrPlayer) {
-								System.out.println("여기다!"); 
-								break vrLoop;
-							} 
 						}
 					}
 					
-					vrStone = stone;
-					vrLoop:
-					for (int i = 0; i < gameBoard.length; i++) {
-						for (int j = 0; j < gameBoard.length; j++) {
-							vrGameBoard = utils.deepCopy(gameBoard);
-							vrLocation[0] = i + "";
-							vrLocation[1] = j + "";
-							if(vrGameBoard[Integer.parseInt(vrLocation[0])][Integer.parseInt(vrLocation[1])] != blank) continue;
-							vrGameBoard[Integer.parseInt(vrLocation[0])][Integer.parseInt(vrLocation[1])] = vrStone;
-							System.out.println("ai vr test");
-							for (String[] arr : vrGameBoard) {
-								System.out.println(Arrays.toString(arr));
+					if(winner != currentPlayer) {
+						vrStone = stone == white ? black : white;
+						vrLoop:
+						for (int i = 0; i < gameBoard.length; i++) {
+							for (int j = 0; j < gameBoard.length; j++) {
+								vrGameBoard = utils.deepCopy(gameBoard, 3, 3);
+								vrLocation[0] = i + "";
+								vrLocation[1] = j + "";
+								if(vrGameBoard[Integer.parseInt(vrLocation[0])][Integer.parseInt(vrLocation[1])] != blank) continue;
+								vrGameBoard[Integer.parseInt(vrLocation[0])][Integer.parseInt(vrLocation[1])] = vrStone;
+//								System.out.println("ai block vr test");
+//								for (String[] arr : vrGameBoard) {
+//									System.out.println(Arrays.toString(arr));
+//								}
+								System.out.println();
+								winner = judge(players[0], players[1], vrGameBoard);
+								if(winner == vrPlayer) {
+									System.out.println("block point");
+									System.out.println(Arrays.toString(vrLocation));
+									vrBlockLocation = utils.deepCopy(vrLocation, 2);
+									break vrLoop;
+								} 
 							}
-							System.out.println();
-							winner = judge(players[0], players[1], vrGameBoard);
-							if(winner == currentPlayer) {
-								System.out.println("여기다"); 
-								break vrLoop;
-							} 
 						}
 					}
-				
-					if(winner != currentPlayer) {
-						int i = 0;
-						for(i = 0; i < corners.length; i++) {
-							if(gameBoard[Integer.parseInt(corners[i][0])][Integer.parseInt(corners[i][1])] == blank) {
-								location = corners[i];
-								break;
+					
+					
+					
+					System.out.println(winner);
+					System.out.println(vrPlayer.getName());
+					if(winner == currentPlayer) {
+						location = vrWinLocation;
+					} else if(winner != currentPlayer) {
+						if(winner == vrPlayer) {
+							location = vrBlockLocation;
+						} else {
+							System.out.println("check corners");
+							System.out.println(location[0]);
+							int i = 0;
+							int j = 0;
+							for(i = 0; i < corners.length; i++) {
+								if(gameBoard[1][1] == blank) {
+									location[0] = "1"; 
+									location[1] = "1";
+									break;
+								}
+								if(gameBoard[Integer.parseInt(corners[i][0])][Integer.parseInt(corners[i][1])] == blank) {
+									System.out.println("find corner");
+									location = corners[i];
+									break;
+								}
 							}
+							
+							if(gameBoard[Integer.parseInt(location[0])][Integer.parseInt(location[1])] != blank) {
+								System.out.println("check blank");
+								for (i = 0; i < gameBoard.length; i++) {
+									for(j = 0; j < gameBoard.length; j++) {
+										if(gameBoard[i][j] == blank) {
+											location[0] = i + "";
+											location[1] = j + "";
+										}
+									}
+								}
+							}
+							
+							System.out.println(Arrays.toString(location));
 						}
-					}else {
-						location = vrLocation;
-						System.out.println(Arrays.toString(location));
 					}
 				}
-				
+				System.out.println("final point");
+				System.out.println("vrLocation : "+ Arrays.toString(vrLocation));
+				System.out.println("location : " + Arrays.toString(location));
 				gameBoard[Integer.parseInt(location[0])][Integer.parseInt(location[1])] = stone;
 				
 			} catch (Exception e) {
@@ -223,10 +268,6 @@ public class Game implements GameSystem, GameService {
 		if(checkAfterHorrizonCnt(blackVerticalCnt, array, black)) return player2;
 		
 		return null;
-	}
-	
-	public void judge() {
-		
 	}
 	
 	@Override
