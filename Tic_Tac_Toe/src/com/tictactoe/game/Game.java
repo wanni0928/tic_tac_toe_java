@@ -155,8 +155,6 @@ public class Game implements GameSystem, GameService {
 						if(winner == vrPlayer) {
 							location = vrBlockLocation;
 						} else {
-							System.out.println("check corners");
-							System.out.println(location[0]);
 							int i = 0;
 							int j = 0;
 							for(i = 0; i < corners.length; i++) {
