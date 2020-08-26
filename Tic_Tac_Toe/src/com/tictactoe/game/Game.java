@@ -263,11 +263,6 @@ public class Game implements GameSystem, GameService {
 		}
 		return false;
 	}
-
-	@Override
-	public boolean isFinished() {
-		return true;
-	}
 	
 	@Override
 	public void initialize() {
