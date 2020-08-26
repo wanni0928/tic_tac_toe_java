@@ -47,3 +47,6 @@
 8. If the program can't find it in the vertical direction, it will check if there's anything going diagonally.
 9. The appearance of what was found diagonally, the game continues, and the next player is given a chance to place the stone.
 10. The process from 5 to 9 will be repeated until either player wins N times.
+
+### UML
+![UML DIAGRAM](https://github.com/wanni0928/tic_tac_toe_java/blob/master/asset/images/uml.gif)
